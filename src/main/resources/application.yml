@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://ample-molerat-4741.6wr.cockroachlabs.cloud:26257/roach_data?sslmode=verify-full&sslrootcert=C:\Users\Joshu\AppData\Roaming\postgresql\root.crt
+    username: Jem
+    password: -rGoRDzowiOylPJ6k9afyg
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    enabled: false
