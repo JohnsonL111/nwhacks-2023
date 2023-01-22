@@ -30,7 +30,7 @@ public class PersonController {
     @PatchMapping("/subscribe")
     public ResponseEntity<String> subscribe(@RequestParam Long personId, @RequestParam List<Long> subscribePersonIds) {
         personService.subscribe(personId, subscribePersonIds);
-        return ResponseEntity.ok().body("Removed successfully!");
+        return ResponseEntity.ok().body("Added successfully!");
     }
 
     @PatchMapping("/unsubscribe")
