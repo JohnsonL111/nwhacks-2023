@@ -1,4 +1,4 @@
-package com.J3M.nwHacks2023.model;
+package com.J3M.nwhacks.model;
 
 import lombok.Data;
 
@@ -12,4 +12,6 @@ public class Location {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String name;
 }
