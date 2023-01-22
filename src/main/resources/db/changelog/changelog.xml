@@ -9,6 +9,6 @@
 
     <changeSet id="1" author="root" context="crdb">
         <validCheckSum>ANY</validCheckSum>
-        <sqlFile path="db/create.sql"/>
+        <sqlFile path="load.sql"/>
     </changeSet>
 </databaseChangeLog>
