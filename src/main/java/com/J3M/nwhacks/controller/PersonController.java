@@ -9,34 +9,35 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/person")
+@CrossOrigin("http://localhost:3000")
 public class PersonController {
 
     private final PersonService personService;
 
-    @PatchMapping("/move/{locationId}")
-    public ResponseEntity<String> movePerson(@PathVariable Long locationId, @RequestHeader Long personId) {
+    @PatchMapping("/move")
+    public ResponseEntity<String> movePerson(@RequestParam Long locationId, @RequestParam Long personId) {
         personService.movePerson(locationId, personId);
         return ResponseEntity.ok().body("Moved successfully!");
     }
 
     @PatchMapping("/remove")
-    public ResponseEntity<String> removeLocation(@RequestHeader Long personId) {
+    public ResponseEntity<String> removeLocation(@RequestParam Long personId) {
         personService.removePerson(personId);
         return ResponseEntity.ok().body("Removed successfully!");
     }
 
-    @PutMapping("/login/{username}")
-    public ResponseEntity<Long> login(@PathVariable String username) {
+    @PutMapping("/login")
+    public ResponseEntity<Long> login(@RequestParam String username) {
         return ResponseEntity.ok().body(personService.login(username));
     }
 
-    @PostMapping("/login/{username}/{number}")
-    public ResponseEntity<Long> createUser(@PathVariable String username, @PathVariable String number) {
+    @PostMapping("/login")
+    public ResponseEntity<Long> createUser(@RequestParam String username, @RequestParam String number) {
         return ResponseEntity.ok().body(personService.createUser(username, number));
     }
 
-    @GetMapping("/login/check/{username}")
-    public ResponseEntity<Boolean> checkUsername(@PathVariable String username) {
+    @GetMapping("/login/check")
+    public ResponseEntity<Boolean> checkUsername(@RequestParam String username) {
         return ResponseEntity.ok().body(personService.checkUsername(username));
     }
 }
