@@ -21,10 +21,7 @@ public class Person {
     private String phoneNumber;
 
     @ManyToOne
-    @JoinColumns({
-                    @JoinColumn(name = "currentLocationId", referencedColumnName = "id"),
-                    @JoinColumn(name = "currentLocationName", referencedColumnName = "name")
-            })
+    @JoinColumns(@JoinColumn(name = "currentLocationId", referencedColumnName = "id"))
     private Location currentLocation;
 
     @ManyToMany
