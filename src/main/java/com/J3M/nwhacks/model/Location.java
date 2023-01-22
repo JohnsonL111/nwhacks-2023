@@ -19,4 +19,8 @@ public class Location {
 
     @OneToMany(mappedBy = "currentLocation")
     private List<Person> currentPeople;
+
+    @ManyToMany
+    @JoinTable(name = "subscribedLocations")
+    private List<Person> listeningPeople;
 }
