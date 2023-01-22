@@ -29,7 +29,10 @@ public class Location {
     private List<Person> currentPeople;
 
     @ManyToMany
-    @JoinTable(name = "subscribedLocations")
+    @JoinTable(name = "subscribedLocations",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "location_id")
+    )
     @JsonIgnore
     @ToString.Exclude
     @HashCodeExclude

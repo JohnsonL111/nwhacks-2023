@@ -33,7 +33,10 @@ public class Person {
     private Location currentLocation;
 
     @ManyToMany
-    @JoinTable(name = "subscribedLocations")
+    @JoinTable(name = "subscribedLocations",
+            joinColumns = @JoinColumn(name = "location_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id")
+    )
     @JsonIgnore
     @HashCodeExclude
     private List<Location> subscribedLocations;

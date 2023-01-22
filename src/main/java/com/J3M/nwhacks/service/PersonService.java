@@ -80,10 +80,7 @@ public class PersonService {
                 .filter(sub -> !person.getSubscribedPeople().contains(sub))
                 .toList();
 
-        subscribePeople.forEach(sub -> sub.getListeningPeople().add(person));
-        subscribePeople.forEach(person.getSubscribedPeople()::add);
-
-        personRepository.saveAll(subscribePeople);
+        person.getSubscribedPeople().addAll(subscribePeople);
         personRepository.save(person);
     }
 
@@ -91,10 +88,7 @@ public class PersonService {
         var person = personRepository.findById(personId).orElseThrow();
         var unsubscribePeople = unsubscribePersonId.stream().map(personRepository::findById).filter(Optional::isPresent).map(Optional::get).toList();
 
-        unsubscribePeople.forEach(sub -> sub.getListeningPeople().remove(person));
-        unsubscribePeople.forEach(person.getSubscribedPeople()::remove);
-
-        personRepository.saveAll(unsubscribePeople);
+        person.getSubscribedPeople().removeAll(unsubscribePeople);
         personRepository.save(person);
     }
 }

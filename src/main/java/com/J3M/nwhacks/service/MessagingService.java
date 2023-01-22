@@ -16,6 +16,8 @@ public class MessagingService {
     public void messagePeople(List<String> contactPeopleNumbers, String personOfInterest, String location) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
+        contactPeopleNumbers = contactPeopleNumbers.stream().distinct().toList();
+
           // loop through numbers and send them message
          for (String number : contactPeopleNumbers) {
             Message message = Message.creator(

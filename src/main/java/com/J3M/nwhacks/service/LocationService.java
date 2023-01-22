@@ -31,10 +31,7 @@ public class LocationService {
                 .toList();
 
         person.getSubscribedLocations().addAll(locations);
-        locations.forEach(location -> location.getListeningPeople().add(person));
-
         personRepository.save(person);
-        locationRepository.saveAll(locations);
     }
 
     public void unsubscribe(Long personId, List<String> unsubLocationIds) {
@@ -47,10 +44,7 @@ public class LocationService {
                 .toList();
 
         locations.forEach(person.getSubscribedLocations()::remove);
-        locations.forEach(location -> location.getListeningPeople().remove(person));
-
         personRepository.save(person);
-        locationRepository.saveAll(locations);
     }
 
     public List<Location> getAll() {
