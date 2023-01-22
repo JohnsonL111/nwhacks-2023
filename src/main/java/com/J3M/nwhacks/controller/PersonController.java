@@ -6,8 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/person")
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("/person")
 public class PersonController {
 
     private final PersonService personService;
@@ -16,6 +17,12 @@ public class PersonController {
     public ResponseEntity<String> movePerson(@PathVariable Long locationId, @RequestHeader Long personId) {
         personService.movePerson(locationId, personId);
         return ResponseEntity.ok().body("Moved successfully!");
+    }
+
+    @PatchMapping("/remove")
+    public ResponseEntity<String> removeLocation(@RequestHeader Long personId) {
+        personService.removePerson(personId);
+        return ResponseEntity.ok().body("Removed successfully!");
     }
 
     @PutMapping("/login/{username}")

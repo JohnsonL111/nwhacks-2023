@@ -34,6 +34,12 @@ public class PersonService {
         var contactNumbers = contactPeople.stream().map(Person::getPhoneNumber).toList();
 
         messagingService.messagePeople(contactNumbers, person.getUsername(), location.getName());
+
+        person.setCurrentLocation(location);
+        location.getCurrentPeople().add(person);
+
+        locationRepository.save(location);
+        personRepository.save(person);
     }
 
     public Long login(String username) {
@@ -53,5 +59,17 @@ public class PersonService {
 
     public Boolean checkUsername(String username) {
         return personRepository.existsByUsername(username);
+    }
+
+    public void removePerson(Long personId) {
+        var person = personRepository.findById(personId).orElseThrow();
+        var location = person.getCurrentLocation();
+        person.setCurrentLocation(null);
+
+        if (location != null) {
+            location.getCurrentPeople().remove(person);
+            locationRepository.save(location);
+        }
+        personRepository.save(person);
     }
 }
