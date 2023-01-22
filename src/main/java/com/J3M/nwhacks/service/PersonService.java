@@ -18,8 +18,8 @@ public class PersonService {
     private final LocationRepository locationRepository;
     private final MessagingService messagingService;
 
-    public void movePerson(Long locationId, Long personId) {
-        var location = locationRepository.findById(locationId).orElseThrow();
+    public void movePerson(String locationString, Long personId) {
+        var location = locationRepository.findByIdentifierName(LocationService.createIdentifier(locationString)).orElseThrow();
         var person = personRepository.findById(personId).orElseThrow();
 
         var listeningPeople = person.getListeningPeople();

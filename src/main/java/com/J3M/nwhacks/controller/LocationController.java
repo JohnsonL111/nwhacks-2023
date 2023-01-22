@@ -17,14 +17,14 @@ public class LocationController {
     private final LocationService locationService;
 
     @PatchMapping("/subscribe")
-    public ResponseEntity<String> subscribe(@RequestParam Long personId, @RequestParam List<Long> subLocationIds) {
-        locationService.subscribe(personId, subLocationIds);
+    public ResponseEntity<String> subscribe(@RequestParam Long personId, @RequestParam List<String> locationStrings) {
+        locationService.subscribe(personId, locationStrings);
         return ResponseEntity.ok().body("Removed successfully!");
     }
 
     @PatchMapping("/unsubscribe")
-    public ResponseEntity<String> unsubscribe(@RequestParam Long personId, @RequestParam List<Long> unsubLocationIds) {
-        locationService.unsubscribe(personId, unsubLocationIds);
+    public ResponseEntity<String> unsubscribe(@RequestParam Long personId, @RequestParam List<String> locationStrings) {
+        locationService.unsubscribe(personId, locationStrings);
         return ResponseEntity.ok().body("Removed successfully!");
     }
 

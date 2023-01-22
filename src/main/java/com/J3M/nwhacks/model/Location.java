@@ -20,6 +20,9 @@ public class Location {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "identifierName", unique = true)
+    private String identifierName;
+
     @OneToMany(mappedBy = "currentLocation")
     @ToString.Exclude
     @HashCodeExclude

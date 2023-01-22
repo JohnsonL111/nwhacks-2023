@@ -16,8 +16,8 @@ public class PersonController {
     private final PersonService personService;
 
     @PatchMapping("/move")
-    public ResponseEntity<String> movePerson(@RequestParam Long locationId, @RequestParam Long personId) {
-        personService.movePerson(locationId, personId);
+    public ResponseEntity<String> movePerson(@RequestParam String locationString, @RequestParam Long personId) {
+        personService.movePerson(locationString, personId);
         return ResponseEntity.ok().body("Moved successfully!");
     }
 
@@ -53,4 +53,6 @@ public class PersonController {
     public ResponseEntity<Boolean> checkUsername(@RequestParam String username) {
         return ResponseEntity.ok().body(personService.checkUsername(username));
     }
+
+
 }
