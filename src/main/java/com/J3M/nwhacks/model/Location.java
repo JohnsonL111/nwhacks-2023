@@ -21,7 +21,6 @@ public class Location {
     private String name;
 
     @OneToMany(mappedBy = "currentLocation")
-    @JsonIgnore
     @ToString.Exclude
     @HashCodeExclude
     private List<Person> currentPeople;

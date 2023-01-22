@@ -1,5 +1,6 @@
 package com.J3M.nwhacks.controller;
 
+import com.J3M.nwhacks.model.Location;
 import com.J3M.nwhacks.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,10 @@ public class LocationController {
     public ResponseEntity<String> unsubscribe(@RequestParam Long personId, @RequestParam List<Long> unsubLocationIds) {
         locationService.unsubscribe(personId, unsubLocationIds);
         return ResponseEntity.ok().body("Removed successfully!");
+    }
+
+    @GetMapping()
+    public List<Location> getLocations() {
+        return locationService.getAll();
     }
 }

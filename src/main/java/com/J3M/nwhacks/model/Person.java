@@ -28,11 +28,13 @@ public class Person {
 
     @ManyToOne
     @JoinColumns(@JoinColumn(name = "currentLocationId", referencedColumnName = "id"))
+    @JsonIgnore
     @HashCodeExclude
     private Location currentLocation;
 
     @ManyToMany
     @JoinTable(name = "subscribedLocations")
+    @JsonIgnore
     @HashCodeExclude
     private List<Location> subscribedLocations;
 

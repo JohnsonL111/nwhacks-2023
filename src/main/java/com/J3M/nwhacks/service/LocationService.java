@@ -1,5 +1,6 @@
 package com.J3M.nwhacks.service;
 
+import com.J3M.nwhacks.model.Location;
 import com.J3M.nwhacks.repository.LocationRepository;
 import com.J3M.nwhacks.repository.PersonRepository;
 import lombok.AllArgsConstructor;
@@ -43,5 +44,9 @@ public class LocationService {
 
         personRepository.save(person);
         locationRepository.saveAll(locations);
+    }
+
+    public List<Location> getAll() {
+        return locationRepository.findAll();
     }
 }
