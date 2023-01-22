@@ -24,10 +24,12 @@ public class PersonService {
 
         var listeningPeople = person.getListeningPeople();
         var listeningLocationPeople = location.getListeningPeople();
+        var currentLocationPeople = location.getCurrentPeople();
 
         var contactPeople = new HashSet<Person>();
         contactPeople.addAll(listeningPeople);
         contactPeople.addAll(listeningLocationPeople);
+        contactPeople.addAll(currentLocationPeople);
 
         var contactNumbers = contactPeople.stream().map(Person::getPhoneNumber).toList();
 
