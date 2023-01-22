@@ -21,7 +21,11 @@ public class LocationService {
 
     public void subscribe(Long personId, List<Long> subLocationIds) {
         var person = personRepository.findById(personId).orElseThrow();
-        var locations = subLocationIds.stream().map(locationRepository::findById).filter(Optional::isPresent).map(Optional::get).toList();
+        var locations = subLocationIds.stream().map(locationRepository::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(loc -> !person.getSubscribedLocations().contains(loc))
+                .toList();
 
         person.getSubscribedLocations().addAll(locations);
         locations.forEach(location -> location.getListeningPeople().add(person));

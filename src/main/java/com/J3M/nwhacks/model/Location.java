@@ -1,9 +1,12 @@
 package com.J3M.nwhacks.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import liquibase.repackaged.org.apache.commons.lang3.builder.HashCodeExclude;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "location")
@@ -18,9 +21,15 @@ public class Location {
     private String name;
 
     @OneToMany(mappedBy = "currentLocation")
-    private Set<Person> currentPeople;
+    @JsonIgnore
+    @ToString.Exclude
+    @HashCodeExclude
+    private List<Person> currentPeople;
 
     @ManyToMany
     @JoinTable(name = "subscribedLocations")
-    private Set<Person> listeningPeople;
+    @JsonIgnore
+    @ToString.Exclude
+    @HashCodeExclude
+    private List<Person> listeningPeople;
 }

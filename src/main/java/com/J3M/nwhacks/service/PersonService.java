@@ -73,7 +73,12 @@ public class PersonService {
 
     public void subscribe(Long personId, List<Long> subscribePersonIds) {
         var person = personRepository.findById(personId).orElseThrow();
-        var subscribePeople = subscribePersonIds.stream().map(personRepository::findById).filter(Optional::isPresent).map(Optional::get).toList();
+        var subscribePeople = subscribePersonIds.stream()
+                .map(personRepository::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(sub -> !person.getSubscribedPeople().contains(sub))
+                .toList();
 
         subscribePeople.forEach(sub -> sub.getListeningPeople().add(person));
         subscribePeople.forEach(person.getSubscribedPeople()::add);
