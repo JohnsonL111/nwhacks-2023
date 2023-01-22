@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "person")
@@ -32,19 +32,19 @@ public class Person {
 
     @ManyToMany
     @JoinTable(name = "subscribedLocations")
-    private List<Location> subscribedLocations;
+    private Set<Location> subscribedLocations;
 
     @ManyToMany
     @JoinTable(
             name = "subscribedPersons",
             joinColumns = @JoinColumn(name = "subscribed_person"),
             inverseJoinColumns = @JoinColumn(name = "listening_person"))
-    private List<Person> subscribedPeople;
+    private Set<Person> subscribedPeople;
 
     @ManyToMany
     @JoinTable(
             name = "subscribedPersons",
             joinColumns = @JoinColumn(name = "listening_person"),
             inverseJoinColumns = @JoinColumn(name = "subscribed_person"))
-    private List<Person> listeningPeople;
+    private Set<Person> listeningPeople;
 }

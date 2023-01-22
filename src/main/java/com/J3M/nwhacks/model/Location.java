@@ -3,7 +3,7 @@ package com.J3M.nwhacks.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "location")
@@ -18,9 +18,9 @@ public class Location {
     private String name;
 
     @OneToMany(mappedBy = "currentLocation")
-    private List<Person> currentPeople;
+    private Set<Person> currentPeople;
 
     @ManyToMany
     @JoinTable(name = "subscribedLocations")
-    private List<Person> listeningPeople;
+    private Set<Person> listeningPeople;
 }

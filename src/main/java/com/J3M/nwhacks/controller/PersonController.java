@@ -1,10 +1,11 @@
 package com.J3M.nwhacks.controller;
 
 import com.J3M.nwhacks.service.PersonService;
-import liquibase.pro.packaged.P;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +24,18 @@ public class PersonController {
     @PatchMapping("/remove")
     public ResponseEntity<String> removeLocation(@RequestParam Long personId) {
         personService.removePerson(personId);
+        return ResponseEntity.ok().body("Removed successfully!");
+    }
+
+    @PatchMapping("/subscribe")
+    public ResponseEntity<String> subscribe(@RequestParam Long personId, @RequestParam List<Long> subscribePersonIds) {
+        personService.subscribe(personId, subscribePersonIds);
+        return ResponseEntity.ok().body("Removed successfully!");
+    }
+
+    @PatchMapping("/unsubscribe")
+    public ResponseEntity<String> unsubscribe(@RequestParam Long personId, @RequestParam List<Long> subscribePersonIds) {
+        personService.unsubscribe(personId, subscribePersonIds);
         return ResponseEntity.ok().body("Removed successfully!");
     }
 

@@ -3,14 +3,12 @@ package com.J3M.nwhacks.service;
 import com.J3M.nwhacks.model.Person;
 import com.J3M.nwhacks.repository.LocationRepository;
 import com.J3M.nwhacks.repository.PersonRepository;
-import liquibase.pro.packaged.P;
-import liquibase.pro.packaged.R;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.patterns.PerObject;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -70,6 +68,28 @@ public class PersonService {
             location.getCurrentPeople().remove(person);
             locationRepository.save(location);
         }
+        personRepository.save(person);
+    }
+
+    public void subscribe(Long personId, List<Long> subscribePersonIds) {
+        var person = personRepository.findById(personId).orElseThrow();
+        var subscribePeople = subscribePersonIds.stream().map(personRepository::findById).filter(Optional::isPresent).map(Optional::get).toList();
+
+        subscribePeople.forEach(sub -> sub.getListeningPeople().add(person));
+        subscribePeople.forEach(person.getSubscribedPeople()::add);
+
+        personRepository.saveAll(subscribePeople);
+        personRepository.save(person);
+    }
+
+    public void unsubscribe(Long personId, List<Long> unsubscribePersonId) {
+        var person = personRepository.findById(personId).orElseThrow();
+        var unsubscribePeople = unsubscribePersonId.stream().map(personRepository::findById).filter(Optional::isPresent).map(Optional::get).toList();
+
+        unsubscribePeople.forEach(sub -> sub.getListeningPeople().remove(person));
+        unsubscribePeople.forEach(person.getSubscribedPeople()::remove);
+
+        personRepository.saveAll(unsubscribePeople);
         personRepository.save(person);
     }
 }
