@@ -1,4 +1,6 @@
-Find more here: https://devpost.com/software/whereu
+- Backend code for nwhacks 2023 whereu@ project <br />
+- Find more here: https://devpost.com/software/whereu <br />
+- front-end code found here: https://github.com/JohnsonL111/nwhacks2023frontend <br />
 
 ## Inspiration
 Sometimes its hard to know where your friends are as everyone is moving around and due to fear of missing out. Whether it be studying on campus or meeting up at a park, its nice to tell your friends where you are at. You might be wondering, isn't this just SnapChat? Well, you don't share your information 24/7. It's super simple, so even your parents can use it. Also, no one uses SnapChat anymore.
